@@ -1,13 +1,7 @@
 import Image from "next/image";
 
-// ===== ข้อมูลติดต่อ — แก้ตรงนี้ที่เดียว =====
-const LINE_ID = "@vetsynova"; // ตัวอย่าง: เปลี่ยนเป็น LINE ID จริงของร้าน
-const LINE_URL = `https://line.me/R/ti/p/${LINE_ID}`;
-const PHONE_DISPLAY = "02-859-5880";
-const PHONE_URL = "tel:028595880";
-const FACEBOOK_URL = "https://www.facebook.com/VetSynova";
-const EMAIL = "contact@vetsynova.com";
-const CTA_TEXT = "ทักไลน์เลย";
+import { CTA_TEXT, EMAIL, FACEBOOK_URL, LINE_URL, PHONE_DISPLAY, PHONE_URL } from "./contact";
+import ProductCatalog from "./ProductCatalog";
 
 const features = [
   {
@@ -27,41 +21,6 @@ const features = [
     text: "ตั้งแต่แผล ผิวหนัง ช่องหู ไปจนถึงขนมอาหารเสริม ไม่ต้องหาหลายร้าน ปรึกษาเราได้ทุกเรื่อง",
     icon: "heart",
     tone: "bg-soft-sky text-brand-sky",
-  },
-] as const;
-
-const products = [
-  {
-    brand: "Microcyn",
-    image: { src: "/images/microcyn.png", width: 572, height: 295 },
-    title: "ดูแลแผล ผิว ตา หู และช่องปาก",
-    text: "ช่วยทำความสะอาดแผล ลดการอักเสบ และกระตุ้นการหายของแผล",
-    price: "เริ่มต้น ฿495",
-    accent: "from-brand-cyan to-brand-blue",
-  },
-  {
-    brand: "Dermodacyn",
-    image: { src: "/images/dermodacyn.png", width: 572, height: 242 },
-    title: "ฆ่าเชื้อระดับสูง เกรดโรงพยาบาล",
-    text: "ออกฤทธิ์ภายใน 30 วินาที ใช้ได้ทั้งในบ้านและในคลินิก",
-    price: "เริ่มต้น ฿385",
-    accent: "from-brand-sky to-brand-blue-dark",
-  },
-  {
-    brand: "Zymox",
-    image: { src: "/images/zymox.png", width: 572, height: 295 },
-    title: "ดูแลผิวหนังและช่องหู",
-    text: "ช่วยบรรเทาอาการคัน ผิวอักเสบ และการติดเชื้อจากแบคทีเรีย เชื้อรา และยีสต์",
-    price: "เริ่มต้น ฿795",
-    accent: "from-sun to-peach",
-  },
-  {
-    brand: "VF+Core",
-    image: { src: "/images/vfcore.png", width: 481, height: 200 },
-    title: "ขนมอาหารเสริม อร่อย กินง่าย",
-    text: "หลากหลายสูตร ตอบโจทย์สุขภาพสัตว์เลี้ยงแต่ละตัว น้องชอบ เจ้าของสบายใจ",
-    price: "สอบถามราคาทางไลน์",
-    accent: "from-peach to-brand-cyan",
   },
 ] as const;
 
@@ -315,31 +274,9 @@ export default function Home() {
             <SectionHeading
               eyebrow="ผลิตภัณฑ์และราคา"
               title="ครบทุกการดูแล ในแบรนด์เดียว"
-              text="ราคาอาจเปลี่ยนแปลงตามขนาดและโปรโมชั่น ทักไลน์เพื่อสอบถามราคาล่าสุดได้เลย"
+              text="เลือกแบรนด์เพื่อดูสินค้าแต่ละรายการ ราคาอาจเปลี่ยนแปลงตามโปรโมชั่น ทักไลน์เพื่อสอบถามราคาล่าสุดได้เลย"
             />
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-              {products.map((p) => (
-                <div key={p.brand} className="flex flex-col overflow-hidden rounded-card bg-white shadow-sm ring-1 ring-ink/5">
-                  <div className="relative flex h-44 items-center justify-center bg-white px-4 pb-2 pt-4">
-                    <Image
-                      src={p.image.src}
-                      width={p.image.width}
-                      height={p.image.height}
-                      alt={`ผลิตภัณฑ์ ${p.brand}`}
-                      sizes="(min-width: 1024px) 280px, (min-width: 640px) 45vw, 90vw"
-                      className="max-h-full w-auto object-contain"
-                    />
-                  </div>
-                  <div className={`h-1.5 bg-gradient-to-r ${p.accent}`} />
-                  <div className="flex flex-1 flex-col p-5">
-                    <p className="text-small font-semibold text-brand-blue">{p.brand}</p>
-                    <h3 className="mt-1 text-body font-semibold text-ink">{p.title}</h3>
-                    <p className="mt-2 flex-1 text-small text-muted">{p.text}</p>
-                    <p className="mt-4 text-body font-semibold text-brand-blue">{p.price}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <ProductCatalog />
             <div className="mt-10 text-center">
               <LineButton />
             </div>

@@ -18,6 +18,7 @@
   --soft-sky: #eaf6fb;
 
   --line-green: #06c755;
+  --line-green-dark: #05a648;
   --white: #ffffff;
 
   /* ขนาดตัวอักษร (มือถือ) */
@@ -39,6 +40,7 @@
   --color-peach: var(--warm-peach);
   --color-soft-sky: var(--soft-sky);
   --color-line: var(--line-green);
+  --color-line-dark: var(--line-green-dark);
 
   --font-sans: var(--font-prompt);
 
