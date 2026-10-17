@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+/* สีและขนาดตัวอักษรของแบรนด์ — แก้ที่นี่ที่เดียว ใช้ทั้งหน้า */
+:root {
+  /* CI จาก vetsynova.com */
+  --brand-blue: #427ed1;
+  --brand-blue-dark: #2f62a8;
+  --brand-cyan: #55cce5;
+  --brand-sky: #00aeef;
+  --brand-ink: #2b2e32;
+  --brand-gray: #5a5e66;
+
+  /* สีอบอุ่นเสริม */
+  --warm-cream: #fffaf2;
+  --warm-sand: #fff1dc;
+  --warm-yellow: #ffce78;
+  --warm-peach: #ff966d;
+  --soft-sky: #eaf6fb;
+
+  --line-green: #06c755;
+  --white: #ffffff;
+
+  /* ขนาดตัวอักษร (มือถือ) */
+  --size-display: 2.25rem;
+  --size-title: 1.75rem;
+  --size-subtitle: 1.25rem;
+}
+
+@theme inline {
+  --color-brand-blue: var(--brand-blue);
+  --color-brand-blue-dark: var(--brand-blue-dark);
+  --color-brand-cyan: var(--brand-cyan);
+  --color-brand-sky: var(--brand-sky);
+  --color-ink: var(--brand-ink);
+  --color-muted: var(--brand-gray);
+  --color-cream: var(--warm-cream);
+  --color-sand: var(--warm-sand);
+  --color-sun: var(--warm-yellow);
+  --color-peach: var(--warm-peach);
+  --color-soft-sky: var(--soft-sky);
+  --color-line: var(--line-green);
+
+  --font-sans: var(--font-prompt);
+
+  /* ขนาดตัวอักษร */
+  --text-display: var(--size-display);
+  --text-display--line-height: 1.3;
+  --text-title: var(--size-title);
+  --text-title--line-height: 1.35;
+  --text-subtitle: var(--size-subtitle);
+  --text-subtitle--line-height: 1.5;
+  --text-body: 1rem;
+  --text-body--line-height: 1.75;
+  --text-small: 0.875rem;
+  --text-small--line-height: 1.6;
+
+  --radius-card: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --size-display: 3.25rem;
+    --size-title: 2.25rem;
+    --size-subtitle: 1.375rem;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--warm-cream);
+  color: var(--brand-ink);
+  font-family: var(--font-prompt), sans-serif;
+}
