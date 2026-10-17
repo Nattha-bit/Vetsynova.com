@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 // ===== ข้อมูลติดต่อ — แก้ตรงนี้ที่เดียว =====
 const LINE_ID = "@vetsynova"; // ตัวอย่าง: เปลี่ยนเป็น LINE ID จริงของร้าน
 const LINE_URL = `https://line.me/R/ti/p/${LINE_ID}`;
@@ -31,6 +33,7 @@ const features = [
 const products = [
   {
     brand: "Microcyn",
+    image: { src: "/images/microcyn.png", width: 572, height: 295 },
     title: "ดูแลแผล ผิว ตา หู และช่องปาก",
     text: "ช่วยทำความสะอาดแผล ลดการอักเสบ และกระตุ้นการหายของแผล",
     price: "เริ่มต้น ฿495",
@@ -38,6 +41,7 @@ const products = [
   },
   {
     brand: "Dermodacyn",
+    image: { src: "/images/dermodacyn.png", width: 572, height: 242 },
     title: "ฆ่าเชื้อระดับสูง เกรดโรงพยาบาล",
     text: "ออกฤทธิ์ภายใน 30 วินาที ใช้ได้ทั้งในบ้านและในคลินิก",
     price: "เริ่มต้น ฿385",
@@ -45,6 +49,7 @@ const products = [
   },
   {
     brand: "Zymox",
+    image: { src: "/images/zymox.png", width: 572, height: 295 },
     title: "ดูแลผิวหนังและช่องหู",
     text: "ช่วยบรรเทาอาการคัน ผิวอักเสบ และการติดเชื้อจากแบคทีเรีย เชื้อรา และยีสต์",
     price: "เริ่มต้น ฿795",
@@ -52,6 +57,7 @@ const products = [
   },
   {
     brand: "VF+Core",
+    image: { src: "/images/vfcore.png", width: 481, height: 200 },
     title: "ขนมอาหารเสริม อร่อย กินง่าย",
     text: "หลากหลายสูตร ตอบโจทย์สุขภาพสัตว์เลี้ยงแต่ละตัว น้องชอบ เจ้าของสบายใจ",
     price: "สอบถามราคาทางไลน์",
@@ -186,12 +192,7 @@ function LineButton({ className = "" }: { className?: string }) {
 }
 
 function Logo() {
-  return (
-    <span className="text-xl font-semibold tracking-tight">
-      <span className="text-ink">Vet</span>
-      <span className="text-brand-blue">Synova</span>
-    </span>
-  );
+  return <Image src="/images/logo.png" alt="VetSynova" width={2459} height={497} priority className="h-8 w-auto md:h-9" />;
 }
 
 function SectionHeading({ eyebrow, title, text }: { eyebrow: string; title: string; text?: string }) {
@@ -262,18 +263,25 @@ export default function Home() {
             </div>
 
             {/* ภาพประกอบด้วยรูปทรง */}
-            <div className="relative mx-auto aspect-square w-full max-w-sm md:max-w-md" aria-hidden>
+            <div className="relative mx-auto aspect-square w-full max-w-sm md:max-w-md">
               <div className="absolute inset-6 rounded-[3rem] bg-gradient-to-br from-brand-cyan to-brand-blue rotate-6" />
-              <div className="absolute inset-6 flex items-center justify-center rounded-[3rem] bg-white shadow-xl -rotate-3">
-                <Icon name="paw" className="h-36 w-36 text-brand-blue md:h-44 md:w-44" />
+              <div className="absolute inset-6 overflow-hidden rounded-[3rem] bg-white shadow-xl -rotate-3">
+                <Image
+                  src="/images/vet-hero.jpg"
+                  alt="สัตวแพทย์ดูแลสุนัขและแมว"
+                  fill
+                  priority
+                  sizes="(min-width: 768px) 450px, 90vw"
+                  className="object-cover object-[40%_center]"
+                />
               </div>
-              <div className="absolute left-0 top-10 flex items-center gap-2 rounded-2xl bg-white px-4 py-3 text-small font-medium shadow-lg">
+              <div aria-hidden className="absolute left-0 top-10 flex items-center gap-2 rounded-2xl bg-white px-4 py-3 text-small font-medium shadow-lg">
                 <span className="flex h-8 w-8 items-center justify-center rounded-full bg-sand text-peach">
                   <Icon name="heart" className="h-5 w-5" />
                 </span>
                 ปลอดภัย อ่อนโยน
               </div>
-              <div className="absolute bottom-8 right-0 flex items-center gap-2 rounded-2xl bg-white px-4 py-3 text-small font-medium shadow-lg">
+              <div aria-hidden className="absolute bottom-8 right-0 flex items-center gap-2 rounded-2xl bg-white px-4 py-3 text-small font-medium shadow-lg">
                 <span className="flex h-8 w-8 items-center justify-center rounded-full bg-soft-sky text-brand-blue">
                   <Icon name="stethoscope" className="h-5 w-5" />
                 </span>
@@ -312,11 +320,20 @@ export default function Home() {
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {products.map((p) => (
                 <div key={p.brand} className="flex flex-col overflow-hidden rounded-card bg-white shadow-sm ring-1 ring-ink/5">
-                  <div className={`flex h-28 items-end bg-gradient-to-br p-5 ${p.accent}`}>
-                    <span className="text-subtitle font-semibold text-white drop-shadow-sm">{p.brand}</span>
+                  <div className="relative flex h-44 items-center justify-center bg-white px-4 pb-2 pt-4">
+                    <Image
+                      src={p.image.src}
+                      width={p.image.width}
+                      height={p.image.height}
+                      alt={`ผลิตภัณฑ์ ${p.brand}`}
+                      sizes="(min-width: 1024px) 280px, (min-width: 640px) 45vw, 90vw"
+                      className="max-h-full w-auto object-contain"
+                    />
                   </div>
+                  <div className={`h-1.5 bg-gradient-to-r ${p.accent}`} />
                   <div className="flex flex-1 flex-col p-5">
-                    <h3 className="text-body font-semibold text-ink">{p.title}</h3>
+                    <p className="text-small font-semibold text-brand-blue">{p.brand}</p>
+                    <h3 className="mt-1 text-body font-semibold text-ink">{p.title}</h3>
                     <p className="mt-2 flex-1 text-small text-muted">{p.text}</p>
                     <p className="mt-4 text-body font-semibold text-brand-blue">{p.price}</p>
                   </div>
@@ -411,10 +428,7 @@ export default function Home() {
       <footer className="bg-ink pb-24 pt-10 text-white/70 md:pb-10">
         <div className="mx-auto flex max-w-6xl flex-col items-center gap-3 px-4 text-center text-small md:flex-row md:justify-between md:px-6 md:text-left">
           <div>
-            <span className="text-xl font-semibold">
-              <span className="text-white">Vet</span>
-              <span className="text-brand-cyan">Synova</span>
-            </span>
+            <Image src="/images/logo-white.png" alt="VetSynova" width={514} height={152} className="mx-auto h-9 w-auto md:mx-0" />
             <p className="mt-1">บริษัท เว็ทซินโนว่า จำกัด · นวัตกรรมสัตวแพทย์ เพื่อสัตว์เลี้ยงและคน</p>
           </div>
           <p>© 2026 VetSynova สงวนลิขสิทธิ์</p>
